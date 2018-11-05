@@ -5,7 +5,7 @@
 
 /*
 	Time Complexity: O(VE)
-		         	For Complete Graphs, T(n) = O (V^3).
+		         For Complete Graphs, T(n) = O (V^3).
 */
 
 
