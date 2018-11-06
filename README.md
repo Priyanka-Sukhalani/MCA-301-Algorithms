@@ -1,2 +1,2 @@
-# MCA-301-Algorithms-Section-A
+# MCA-301-Algorithms
 Assignment - 3
