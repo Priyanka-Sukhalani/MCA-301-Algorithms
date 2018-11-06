@@ -80,7 +80,6 @@ int main() {
     vector<int> dim;
     int row;
     int col;
-    int flag = 0;
     
     cout<<"\n Enter the order of first matrix: ";
     
@@ -104,32 +103,29 @@ int main() {
     
         cout<<"\n No of Rows    : ";
         cin>>row;
-        if ( row != dim[dim.size()-1] ) {
-            flag = 1;
-            break;
-        }
-        
         cout<<"\n No of Columns : ";
         cin>>col;
-        dim.push_back(col);
+
+        if ( row != dim[dim.size()-1] ) {
+            cout<<" Matrices are not compatible.";
+            cout<<"\n Do You want to enter valid matrices : ";
+            cin>>ans;
         
-        cout<<" Do You want to enter more matrices : ";
-        cin>>ans;
+        }
+        else {
+            dim.push_back(col);
+            cout<<" Do You want to enter more matrices : ";
+            cin>>ans;
+        }
+    }
         
-    }
-    
-    
-    if ( flag == 1 )
-        cout<<" Matrices are not compatible.";
-    
-    else {
-        int min_operations = no_of_multiplication(dim);
-        cout<<"\n The minimum no of operations required to multiply matrix is: "<<min_operations;
-        cout<<"\n The order of Paranthesis is as follows: ";
-        int n = dim.size() - 1;
-        print_optimal_paranthesis(0,n-1);
-        cout<<endl;
-    }
+   
+    int min_operations = no_of_multiplication(dim);
+    cout<<"\n The minimum no of operations required to multiply matrix is: "<<min_operations;
+    cout<<"\n The order of Paranthesis is as follows: ";
+    int n = dim.size() - 1;
+    print_optimal_paranthesis(0,n-1);
+    cout<<endl;
     
     return 0;
 }
