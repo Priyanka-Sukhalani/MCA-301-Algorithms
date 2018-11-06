@@ -27,6 +27,8 @@
 using namespace std;
 #include <iostream>
 
+#define min_placement 5
+
 void printBillBoard(int x[],int k,bool billboard_no[]) {
 
 	cout << "\n BillBoard should be placed (Position) at : ";
@@ -58,7 +60,7 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 				max_rev[i] = max_rev[i-1];
 
 			else {
-				if ( i <= 5 ) { 
+				if ( i <= min_placement ) { 
 
 					// to choose/ignore the starting billboard which are less than or equal to 5 miles apart
 					int t1 = max_rev[i-1]; 
@@ -73,7 +75,7 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 				}
 
 				else {
-					int t1 = max_rev[i-5-1] + r[n];
+					int t1 = max_rev[i-min_placement-1] + r[n];
 					int t2 = max_rev[i-1];
 					if ( t1 > t2 ) {
 						
@@ -96,7 +98,7 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 	n = k-1;
 	int value = max_rev[M];
 	
-
+	//Printing BillBoard No which are being placed.
 	for ( int i = M-1; i >= 0 ; i-- ) {
 		
 		if ( value == max_rev[i] && max_rev[i] > 0 ) {
