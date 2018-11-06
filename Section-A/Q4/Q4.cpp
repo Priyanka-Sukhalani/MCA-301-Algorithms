@@ -135,6 +135,11 @@ int main () {
 	for ( int i=0; i<k; i++ ) {
 		cout <<" BillBoard Position  : ";
 		cin >> x[i];
+		if ( x[i] - x[i-1] < 0 && i > 0 ) {
+			cout << "\n Cannot allow billboard less than the previous billboard position.";
+			cout << "\n Re-enter BillBoard Position greater than previous billboard position  : ";
+			cin >> x[i];
+		}
 		cout <<" BillBoard Revenue   : ";
 		cin >> r[i];
 		cout <<"\n";
