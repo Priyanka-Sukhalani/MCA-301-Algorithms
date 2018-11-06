@@ -24,7 +24,7 @@ struct Graph
 	Edge *edge;
 };
 
-Graph *create_Graph ( int v, int e) {
+Graph *generate_Graph ( int v, int e) {
 	Graph *G = new Graph;
 	G->V = v;
 	G->E = e;
@@ -135,7 +135,7 @@ int main() {
 	
 	cout<<"\n";
 
-	Graph *G = create_Graph(V,E);
+	Graph *G = generate_Graph(V,E);
 
 	for (int i=0; i<E; i++) {
 		cout << " Enter Source Vertex      : ";
