@@ -30,8 +30,16 @@ using namespace std;
 #define min_placement 5
 
 void printBillBoard(int x[],int k,bool billboard_no[]) {
+	
+	/*
+		x[] : array containing billboard position
+		k   : no of billboards
+		billboard_no[] : array consisting of 1/0 :
+				 where 1 represents the billboard which is placed.
+	*/
 
 	cout << "\n BillBoard should be placed (Position) at : ";
+	// printing the miles at which billboard are placed.
 	for ( int i=0; i < k; i++) {
 		if ( billboard_no[i] == 1 ) {
 			cout << x[i] << "-miles ";
@@ -42,13 +50,14 @@ void printBillBoard(int x[],int k,bool billboard_no[]) {
 
 int billboard_construction( int M, int k, int x[], int r[] ) {
 
-	int max_rev[M+1];
+	int max_rev[M+1];			// to represent maximum revenue at each mile.
+						// Maximum mile is M.
 	for ( int i=0; i <= M; i++) {
 		max_rev[i] = 0;
 	}
 	int n = 0;
 
-	bool billboard_no[k];
+	bool billboard_no[k];			// to know which billboard is placed.
 	for( int i=0; i < k; i++ ) 
 		billboard_no[i] = 0;
 
@@ -56,11 +65,11 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 	for ( int i = 1; i <= M; i++ ) {
 
 		if ( n < k ) {
-			if ( x[n] != i ) 
-				max_rev[i] = max_rev[i-1];
+			if ( x[n] != i ) 	// if ith mile is not a billboard position
+				max_rev[i] = max_rev[i-1];	// maximum revenue is revenue of previous mile.
 
 			else {
-				if ( i <= min_placement ) { 
+				if ( i <= min_placement ) { 	// when we need to the what will be the starting billboard
 
 					// to choose/ignore the starting billboard which are less than or equal to 5 miles apart
 					int t1 = max_rev[i-1]; 
@@ -75,8 +84,9 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 				}
 
 				else {
-					int t1 = max_rev[i-min_placement-1] + r[n];
-					int t2 = max_rev[i-1];
+					// if ith mile matches with billboard position
+					int t1 = max_rev[i-min_placement-1] + r[n];	// current billboard revenue + maximum revenue of i-6 billboard
+					int t2 = max_rev[i-1];				// current revenue does not contribute to maximum revenue
 					if ( t1 > t2 ) {
 						
 						max_rev[i] = t1;
@@ -108,6 +118,7 @@ int billboard_construction( int M, int k, int x[], int r[] ) {
 
 				while ( n >= 0 ) {
 					if ( x[n] == i+1 ) {
+						
 						billboard_no[n] = 1;
 						value -= r[n];
 						break;
