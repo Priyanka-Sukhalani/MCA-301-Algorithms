@@ -31,6 +31,10 @@
 
 */
 
+/*
+	Perform using character by character comparison using ',' as delimiter.
+*/
+
 using namespace std;
 #include <iostream>
 #include <fstream>
@@ -38,19 +42,20 @@ using namespace std;
 
 bool issubSequence( string seq, string sub_seq ) {
 
-	int n = seq.length();
-	int m = sub_seq.length();
+	int n = seq.length();				// Length of the sequence
+	int m = sub_seq.length();			// Length of the given subsequence 
 
 	int i,j;
 	int initial = 0;
 
 	for ( i=0,j=0; i < n && j < m; ) {
 			initial = j;
-			while ( seq[i] != ',' && i < n ) {
+			while ( seq[i] != ',' && i < n ) {		// when delimiter is reached
+				
 				// while loop is executing constt times.
 				// Length of event << length of the sequence
 
-				if ( seq[i] == sub_seq[j] ) {
+				if ( seq[i] == sub_seq[j] ) {		// character by character comparison
 					i++;
 					j++;
 				}
@@ -80,10 +85,10 @@ bool issubSequence( string seq, string sub_seq ) {
 int main() {
 
 	ifstream f1;
-	f1.open("Sequence.txt");
+	f1.open("Sequence.txt");			// Reading File of events in sequence
 
 	ifstream f2;
-	f2.open("Subsequence.txt");
+	f2.open("Subsequence.txt");			// Reading File of events in given subsequence
 
 	string seq, sub_seq;
 	
@@ -93,7 +98,7 @@ int main() {
 		string s1;
 		getline ( f1, s1);
 
-		seq += s1 + ',' + ' ';
+		seq += s1 + ',' + ' ';			// Reading events from file and storing it in seq.
 	}
 
 	seq[seq.length()-2] = '\0';
@@ -104,7 +109,7 @@ int main() {
 		string s1;
 		getline ( f2, s1 );
 
-		sub_seq += s1 + ',' + ' ';
+		sub_seq += s1 + ',' + ' ';		// Reading events from file and storing it in sub_seq.
 		
 	}
 
@@ -115,7 +120,7 @@ int main() {
 	cout << "\n Events of Sequence SPrime are : \n " << sub_seq << endl;
 
 	
-	if ( issubSequence(seq,sub_seq) ) 
+	if ( issubSequence(seq,sub_seq) )		// checking whether sub_seq is a subsequence of seq, 
 		cout << "\n Sequence Sprime is a sub-sequence of the Sequence S. "<< endl;
 
 	else
