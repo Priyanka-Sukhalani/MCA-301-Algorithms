@@ -45,7 +45,7 @@ bool issubSequence(vector<string> seq, vector<string> sub_seq ) {
 	int i,j;
 	for ( i = 0,j=0 ; i < n && j < m;  ) {
 
-		if ( seq[i].compare(sub_seq[j]) == 0) { 
+		if ( seq[i].compare(sub_seq[j]) == 0) { 	// comparing a whole event using string comparison function.
 			i++;
 			j++;
 		}
@@ -64,26 +64,26 @@ bool issubSequence(vector<string> seq, vector<string> sub_seq ) {
 int main () {
 
 	ifstream f1;
-	f1.open("Sequence.txt");
+	f1.open("Sequence.txt");			// reading file Sequence.txt
 
-	vector<string> seq;
+	vector<string> seq;				// each index of vector contains an event.
 	vector<string> sub_seq;
 
 	string s1;
 	while ( getline ( f1, s1 ) ) {
-		seq.push_back(s1);
+		seq.push_back(s1);			// pushing each event to the vector 'seq'.
 	}
 
 	f1.close();
 
 	ifstream f2;
-	f2.open("Subsequence.txt");
+	f2.open("Subsequence.txt");			// reading file Subsequence.txt
 
 	while (getline ( f2, s1 ) ) {
 		sub_seq.push_back(s1);
 	}
 
-	cout << " \n Events in the sequence are : ";
+	cout << " \n Events in the sequence are : ";	// printing events with separator ','
 	for ( int i=0; i < seq.size()-1; i++)
 		cout << seq[i] << " , ";
 	cout << seq[seq.size()-1] << endl;
@@ -93,7 +93,7 @@ int main () {
 		cout << sub_seq[i] << " , ";
 	cout << sub_seq[sub_seq.size()-1];	
 
-	if ( issubSequence(seq,sub_seq) ) 
+	if ( issubSequence(seq,sub_seq) ) 		// checking whether sub_seq is subsequence of seq.
 		cout << "\n Sequence Sprime is a sub-sequence of the Sequence S "<< endl;
 
 	else
