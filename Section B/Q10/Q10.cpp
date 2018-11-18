@@ -49,6 +49,8 @@ void display(int **adj, int n) {
 	*/
 	int count;
 	
+	int person = 0;
+
 	cout << "------------------People Invited are---------------------";
 	cout << "\n Person \t No of Known People \t Known People ";
 	
@@ -59,7 +61,7 @@ void display(int **adj, int n) {
 				count++;
 
 		if ( count >= 5  ) {
-			
+			person++;
 			cout << "\n   "<< i <<"    \t        " << count <<"       \t   ";
 			for ( int j = 1; j <= n; j++ )
 				if ( adj[i][j] == 1)
@@ -67,6 +69,10 @@ void display(int **adj, int n) {
 		}
 		
 	}
+	if ( person == 0)
+		cout << "\n No person is invited .";
+	else
+		cout << "\n No of People invited are : " << person;
 
 }
 
