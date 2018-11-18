@@ -1,0 +1,78 @@
+/*
+
+Q10)(Planning a party).
+	
+	Alice wants to throw a party and is deciding whom to call. She has n (which is at 
+	least 11) people to choose from and she has made up a list of which pairs of these 
+	people know each other. She wants to invite as many people as possible subject to the
+	following two constraints:
+	
+	1. Every person invited should know at least five other people that are invited.
+	2. Every person invited should not know at least five other people that are invited.
+	
+	Design an efficient algorithm for maximizing the number of people she can invite.
+	Remember to analyze the running time and correctness.
+	
+	Hint: Maximizing the number of invitees is the same as minimizing the number of
+	people Alice doesn’t invite. Obviously Alice might not be able to invite everyone. 
+	
+	For example, if one of the n people knows less than five people out of the n 
+	potential invitees then the first constraint can never be satisfied for that person.
+
+
+*/
+
+/*
+	Approach:
+
+		The problem can e considered as a Graph containing V vertices and E edged
+		where V = n ( gives no of potential invitees)
+		and E Edges is given by no of known people.
+
+		Technique Used: Greedy Approach
+						(Performed using Iteration).
+
+		Time Complexity:
+			remove_bad_vertex()	has a time complexity theta(n^2)
+			display() has a time complexity theta(n^2)
+			(in both the functions for loop is executing exactly n^2 times).
+			Thus the overall time complexity reduces to theta(n^2).
+
+		Space Complexity:
+			a matrix of dimension nXn is required, thus 
+			Space Complexity = theta(n^2).
+
+
+	Correctness:
+
+		 For all people in the final set, 
+
+		 Every Person belongs to final set,  know atleast 5 people and does not know atleast 5 
+		 people. Hence, all inviting people satisfies Alice Constraints.
+
+		 Suppose the optimal set of invitees is P(opt). 
+		 We use induction on the number of people we remove, 
+		 to prove: P(set of people who are invited) always contains P(opt). 
+		 
+		 Base Condition:
+		 Initially, when we have removed 0 people, P contains P(opt). 
+
+		 Inductive Hypothesis:
+		 Assume after removing k people, P contains P(opt). 
+
+		 Inductive Step:
+		 If we remove a (k + 1)th person then this person can not have been in P(opt)
+		 since if persons known to P < 5 or Person unknown to P < 5 ,then
+		 Person Known to P(opt) < 5 or Person unknown to P(opt) < 5. 
+		 Hence P(opt) is still contained in P.
+
+		 There are O(n) iterations and in each we need to scan through the
+		 |P| ≤ n remaining possible invitees to find if there is an i such that 
+		 Persons known to P < 5 or Person unknown to P < 5 (or Bad Vertex) .
+		
+		 If so, we need to update |P| − 1 values of Known persons and Unknown Persons. 
+
+		 Hence Proved.
+
+
+*/
