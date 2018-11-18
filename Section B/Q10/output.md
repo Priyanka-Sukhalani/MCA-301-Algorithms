@@ -190,3 +190,4 @@ Enter No of potential invitees in the party : 13
    10    	        5       	   1 3 4 8 12 
    11    	        5       	   1 3 5 6 7 
    12    	        5       	   1 3 4 6 7 
+   No of People invited are : 11.
