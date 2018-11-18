@@ -1,0 +1,133 @@
+
+/*
+	
+Q9)	Your friend is working as a camp counselor, and he is in charge of organizing
+	activities for a set of junior-high-school-age campers. One of his plans is the
+	following mini-triathlon exercise: each contestant must swim 20 laps of a pool, 
+	then bike 10 miles, and then run 3 miles. The plan is to send the contestants out 
+	in a staggered fashion, via the following rule: the contestants must use the pool 
+	one at a time. In other words, first one contestant swims the 20 laps, gets out, 
+	and starts biking. As soon as this first person is out of the pool, a second 
+	contestant begins swimming the 20 laps; as soon as he/she's out and starts biking, 
+	a third contestant begins swimming... and so on.)
+
+
+	Each contestant has a projected swimming time (the expected time it will take him 
+	or her to complete the 20 laps), a projected biking time (the expected time it will 
+	take him or her to complete the 10 miles of bicycling), and a projected running time 
+	(the time it will take him or her to complete the 3 miles of running). Your friend 
+	wants to decide on a schedule for the triathalon: an order in which to sequence the 
+	starts of the contestants. Let's say that the completion time of a schedule is the 
+	earliest time at which all contestants will be finished with all three legs of the 
+	triathalon, assuming they each spend exactly their projected swimming, biking, and 
+	running times on the three parts. (Again, note that participants can bike and run 
+	simultaneously, but at most one person can be in the pool at any time.) 
+	What's the best order for sending people out, if one wants the whole competition to be 
+	over as early as possible? 
+	More precisely, give an efficient algorithm that produces a schedule 
+	whose completion time is as small as possible.
+
+*/
+
+/*
+	Approach:
+
+			Technique Used: Greedy Approach
+							(As we are minimizing the completion time, by sending contestant with
+							 maximum running + biking time first.)
+
+			Performed using iteration and recursion.
+						. Recursion is used in Merge Sort
+						. Iteration is used in Merging and to send the contestant in above specified
+						  order.
+
+
+			There can be three different ways in which contestant can be sent out for swimming, biking 
+			and running.
+
+			First Way : Contestant with minimum swimming time should go first.
+			Second Way: Contestant woth maximum swimming time should go first.
+			Third Way : Contestant with maximum biking + running time should go first.
+
+			To determine which way is the best to send out the contestant is explained by following example:
+
+			  -------------------------------------------------------------------------------------------------
+			  |  Contestant No | Swimming Time | Biking Time | Running Time |  Sum of Biking and Running Time |			  
+			  |================================================================================================
+			  |       1        |      20       |     25      |      20      |               45                |     
+			  |================================================================================================
+			  |       2        |      35       |     20      |      15      |               35                |
+			  |================================================================================================
+			  |       3        |      40       |     20      |      30      |               50                |
+			  -------------------------------------------------------------------------------------------------
+
+			  First Way: Contestant with minimum swimming time should go first.
+
+			  ---------------------------------------------------------------
+			  |  Contestant No | Swimming Time | Biking Time | Running Time |			  
+			  |==============================================================
+			  |       1        |      20       |     45      |      65      |    
+			  |==============================================================
+			  |       2        |      55       |     75      |      90      |
+			  |==============================================================
+			  |       3        |      95       |     115     |      145     |
+			  ---------------------------------------------------------------
+
+			  		Thus Minimum completion time is 145 minutes				------------------ Case(1)
+
+
+			  Second Way: Contestant with maximum swimming time with should go first.
+
+			  ---------------------------------------------------------------
+			  |  Contestant No | Swimming Time | Biking Time | Running Time |			  
+			  |==============================================================
+			  |       3        |      40       |     60      |      90      |    
+			  |==============================================================
+			  |       2        |      75       |     95      |      110     |
+			  |==============================================================
+			  |       1        |      95       |     120     |      140     |
+			  ---------------------------------------------------------------
+
+			  		Thus Minimum completion time is 140 minutes				------------------ Case(2)
+
+
+			  Third Way: Contestant with maximum biking and running time first.
+
+
+			  ---------------------------------------------------------------
+			  |  Contestant No | Swimming Time | Biking Time | Running Time |			  
+			  |==============================================================
+			  |       3        |      40       |     60      |      90      |    
+			  |==============================================================
+			  |       1        |      60       |     85      |      105     |
+			  |==============================================================
+			  |       2        |      95       |     115     |      130     |
+			  ---------------------------------------------------------------
+
+			  		Thus Minimum completion time is 130 minutes				------------------ Case(3)
+
+
+			  From Case(1) , Case(2) and Case(3) we get that ,
+			  	
+			  	Minimum Completion time is found when contestant with maximum biking and running
+			  	time is sent first.
+
+		Time Complexity: 
+				Step 3. sorting requires nlogn time
+				Step 6 to 13. executes exactly n times
+
+				Thus total complexity is
+					T(n) = O(nlogn) + theta(n)
+					T(n) = O(nlogn).
+
+		Space Complexity:
+				Space is required for Swimming, Biking, Running, Sum, Contestant_No arrays
+				and min_triathlon matrix.
+
+				Swimming, Biking, Running, Sum, Contestant_No: Each requires n space
+				min_triathlon matrix: It requires 4n space
+
+				Thus Space Complexity = theta(n) + theta(4n)
+									  = theta(n).
+
+*/
